@@ -1,63 +1,26 @@
-# Nom de la bibliothèque
 NAME = libft.a
-
-# Dossiers
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
 
-# Liste des fichiers sources
-SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
-       ft_memmove.c ft_memchr.c ft_memcmp.c ft_strlen.c \
-       ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
-       ft_strncat.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
-       ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
-       ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
-       ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c \
-       ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c \
-       ft_strclr.c ft_striter.c ft_striteri.c ft_strmap.c \
-       ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c \
-       ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c \
-       ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
-       ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
-       ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-       ft_lstadd.c ft_lstiter.c ft_lstmap.c
+SRC = $(SRC_DIR)/ft_strlen.c
+OBJ = $(OBJ_DIR)/ft_strlen.o
 
-# Ajout des dossiers aux fichiers sources et objets
-SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
-OBJS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR)
 
-# Compilateur et options
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(INC_DIR)
-
-# Règle par défaut (compile la bibliothèque)
 all: $(NAME)
 
-# Création de la bibliothèque
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
-# Compilation des fichiers objets
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJ): $(SRC)
+	gcc $(CFLAGS) -c $(SRC) -o $(OBJ)
 
-# Créer le dossier obj si nécessaire
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-# Nettoyage des fichiers objets
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -f $(OBJ)
 
-# Nettoyage complet
 fclean: clean
 	rm -f $(NAME)
 
-# Recompiler tout depuis le début
 re: fclean all
-
-# Indique que les règles ne sont pas des fichiers
-.PHONY: all clean fclean re
 
