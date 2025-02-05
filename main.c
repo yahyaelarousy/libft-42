@@ -1,10 +1,9 @@
-#include "includes/libft.h"
+#include "libft.h"
 #include <stdio.h>
 
-int main()
+int main(void)
 {
-    const char *str = "Hello, World!";
-    printf("Length of the string: %zu\n", ft_strlen(str));
-    return 0;
+    char c = '4';
+    printf("%d",ft_isalpha(c));
 }
 
