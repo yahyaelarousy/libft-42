@@ -3,7 +3,8 @@
 
 int main(void)
 {
-    char c = '4';
-    printf("%d",ft_isalpha(c));
+    char str[]="12223";
+    ft_memset(str,'*',5);
+    printf("%s",str);
 }
 
